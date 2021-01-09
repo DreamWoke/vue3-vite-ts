@@ -10,6 +10,9 @@ export default defineConfig({
     "@": resolve(__dirname,"./src"),
     Components: resolve(__dirname, "./src/components"),
   },
+  build:{
+    base:"https://vue3-vite-ts-1300990907.cos.ap-shanghai.myqcloud.com/",
+  },
   plugins: [vue()],
   server:{
     hmr:{overlay:false}

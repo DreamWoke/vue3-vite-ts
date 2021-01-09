@@ -17,6 +17,6 @@
   },
   
   "files":["./shim.d.ts"],
-  "include": ["*.tsx","src/**/*.tsx","src/**/*.ts","src/**/*.d.ts","src/*.ts"],
+  "include": ["*.tsx","src/**/*.tsx","src/**/*.ts","src/**/*.d.ts","src/*.ts","src/*.vue","src/**/*.vue"],
   "exclude": ["/node_modules","vite.config.ts"]
 }

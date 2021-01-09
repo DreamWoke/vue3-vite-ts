@@ -1,27 +1,13 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld ls="234" :msg="we" />
-  <Foo />
   <el-button type="primary">默认按钮</el-button>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-// import HelloWorld from "@/components/HelloWorld.vue";
-import HelloWorld from "Components/HelloWorld.tsx";
-import Foo from "Components/demo";
+import { defineComponent } from "vue"
 export default defineComponent({
   name: "App",
-  components: {
-    HelloWorld,
-    Foo,
-  },
-  data() {
-    return {
-      we: "22",
-    };
-  },
-});
+})
 </script>
 
 <style>
