@@ -1,22 +1,33 @@
 {
-  "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "moduleResolution": "node",
-    "strict": true,
-    "jsx": "preserve",
-    "sourceMap": true,
-    "lib": ["esnext", "dom"],
-    // "types": ["vite/client"],
-    "plugins": [{ "name": "@vuedx/typescript-plugin-vue" }],
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["src/*"],
-      "Components/*":["./src/components/*"]
+    "compilerOptions": {
+        "target": "esnext",
+        "module": "esnext",
+        "lib": ["esnext", "dom"],
+        "strict": true,
+        "jsx": "preserve",
+        "allowJs": true,
+        "sourceMap": true,
+        "moduleResolution": "node",               // 指定模块解析策略
+        "esModuleInterop": true,                  // 支持 CommonJS 和 ES 模块之间的互操作性
+        "types": ["vite/client"],
+        "plugins": [{ "name": "@vuedx/typescript-plugin-vue" }],
+        "baseUrl": "./",
+        "paths": {
+            "@/*": ["src/*"],
+            "Components/*": ["./src/components/*"],
+        },
+
+        "forceConsistentCasingInFileNames": true, // 禁止对同一个文件的不一致的引用
+        "allowSyntheticDefaultImports": true,     // 允许从没有设置默认导出的模块中默认导入
+        "noEmit": true							  // 只想使用tsc的类型检查作为函数时（当其他工具（例如Babel实际编译）时）使用它
     },
-  },
-  
-  "files":["./shim.d.ts"],
-  "include": ["*.tsx","src/**/*.tsx","src/**/*.ts","src/**/*.d.ts","src/*.ts","src/*.vue","src/**/*.vue"],
-  "exclude": ["/node_modules","vite.config.ts"]
+    "include": [
+        "src/*.ts",
+        "src/*.vue",
+        "src/**/*.vue",
+        "src/**/*.ts",
+        "src/**/*.tsx",
+        "src/**/*.d.ts",
+    ],
+    "exclude": ["/node_modules", "vite.config.ts"],
 }

@@ -1,32 +1,39 @@
 module.exports = {
-    // extends: ["alloy", "alloy/vue"],
-    extends: ["alloy", "alloy/vue"],
-    parserOptions: {
-      parser: "@typescript-eslint/parser",
-    },
+    root: true,
     env: {
-      // Your environments (which contains several predefined global variables)
-      //
-      // browser: true,
-      // node: true,
-      // mocha: true,
-      // jest: true,
-      // jquery: true
+        browser: true,
+        es6: true,
+        node: true,
     },
+    extends: [
+        "plugin:vue/vue3-recommended",
+        "plugin:@typescript-eslint/recommended",
+        "prettier/@typescript-eslint",
+        "plugin:prettier/recommended",
+    ],
+    parser: "vue-eslint-parser",
+    parserOptions: {
+        parser: "@typescript-eslint/parser",
+        ecmaVersion: 2020,
+        sourceType: "module",
+        ecmaFeatures: {
+            jsx: true,
+        },
+    },
+    plugins: ["prettier"],
     globals: {
-      // Your global variables (setting to false means it's not allowed to be reassigned)
-      // myGlobal: false
+        // Your global variables (setting to false means it's not allowed to be reassigned)
+        // myGlobal: false
     },
     rules: {
-      "vue/valid-template-root":0,  // vue3.0 allow multiple element
-      "vue/component-tags-order": [
-        "error",
-        {
-          order: ["template", "script", "style"],
-        },
-      ],
-      "no-console": 1,
-      "no-invalid-this": 0,
+        "prettier/prettier": "error",
+        "vue/component-tags-order": [
+            "error",
+            {
+                order: ["template", "script", "style"],
+            },
+        ],
+        "no-console": 1,
+        "no-invalid-this": 0,
     },
-  }
-  
+}
