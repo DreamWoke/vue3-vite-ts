@@ -1,35 +1,49 @@
 import path from "path"
-import { defineConfig } from "vite"
+import { defineConfig, UserConfigExport, ConfigEnv, loadEnv } from "vite"
+import { formatEnv } from "./config/utils"
+import createProxy from "./config/proxy"
+import { createVitePlugins } from "./config/plugins"
 import vue from "@vitejs/plugin-vue"
 
 const { resolve } = path
-
-export default defineConfig({
-    // root:path.resolve(__dirname,"./index.html"),
-    base: "https://vue3-vite-ts-1300990907.cos.ap-shanghai.myqcloud.com/",
-    alias: {
-        "@": resolve(__dirname, "./src"),
-        Components: resolve(__dirname, "./src/components"),
-    },
-    publicDir: "public",
-    plugins: [vue()],
-    server: {
-        hmr: { overlay: false },
-    },
-    esbuild: {
-        jsxInject: `import { h } from 'vue'`,
-        jsxFactory: "h",
-        jsxFragment: "Fragment",
-    },
-    css: {
-        preprocessorOptions: {
-            less: {
-                javascriptEnabled: true,
+export default ({ command, mode }: ConfigEnv): UserConfigExport => {
+    const root: string = process.cwd()
+    const env = loadEnv(mode, root)
+    const isBuild = command === "build"
+    const viteEnv = formatEnv(env)
+    const { VITE_PORT, VITE_PUBLIC_PATH, VITE_PROXY } = viteEnv
+    return defineConfig({
+        base: VITE_PUBLIC_PATH,
+        alias: {
+            "@": resolve(__dirname, "./src"),
+            Components: resolve(__dirname, "./src/components"),
+        },
+        build: {
+            assetsDir: "static",
+        },
+        plugins: [...createVitePlugins(viteEnv, isBuild), vue()],
+        server: {
+            port: VITE_PORT,
+            proxy: createProxy(VITE_PROXY),
+            hmr: {
+                overlay: true,
             },
         },
-    },
-    // json:{
-    //     namedExports:true,
-    //     stringify:true
-    // }
-})
+        esbuild: {
+            jsxInject: `import { h } from 'vue'`,
+            jsxFactory: "h",
+            jsxFragment: "Fragment",
+        },
+        css: {
+            preprocessorOptions: {
+                less: {
+                    javascriptEnabled: true,
+                },
+            },
+        },
+        json: {
+            namedExports: true,
+            stringify: true,
+        },
+    })
+}

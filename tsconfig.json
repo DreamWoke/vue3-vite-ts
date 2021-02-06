@@ -11,7 +11,7 @@
         "esModuleInterop": true,                  // 支持 CommonJS 和 ES 模块之间的互操作性
         "types": ["vite/client"],
         "plugins": [{ "name": "@vuedx/typescript-plugin-vue" }],
-        "baseUrl": "./",
+        "baseUrl": ".",
         "paths": {
             "@/*": ["src/*"],
             "Components/*": ["./src/components/*"],
@@ -21,13 +21,6 @@
         "allowSyntheticDefaultImports": true,     // 允许从没有设置默认导出的模块中默认导入
         "noEmit": true							  // 只想使用tsc的类型检查作为函数时（当其他工具（例如Babel实际编译）时）使用它
     },
-    "include": [
-        "src/*.ts",
-        "src/*.vue",
-        "src/**/*.vue",
-        "src/**/*.ts",
-        "src/**/*.tsx",
-        "src/**/*.d.ts",
-    ],
-    "exclude": ["/node_modules", "vite.config.ts"],
+    "include":["src/*.ts","src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+    "exclude": ["/node_modules", "vite.config.ts","**/*.js"],
 }

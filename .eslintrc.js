@@ -7,26 +7,27 @@ module.exports = {
     },
     extends: [
         "plugin:vue/vue3-recommended",
-        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended", // Uses the recommended rules from the @typescript-eslint/eslint-plugin
         "prettier/@typescript-eslint",
         "plugin:prettier/recommended",
     ],
-    parser: "vue-eslint-parser",
+    parser: "vue-eslint-parser", // Check template eslint error
     parserOptions: {
-        parser: "@typescript-eslint/parser",
+        parser: "@typescript-eslint/parser", // Specify resolution script eslint error
         ecmaVersion: 2020,
         sourceType: "module",
         ecmaFeatures: {
             jsx: true,
+            impliedStrict: true,
         },
     },
-    plugins: ["prettier"],
+    plugins: ["prettier"], // Eslint-plugin-prettier
     globals: {
         // Your global variables (setting to false means it's not allowed to be reassigned)
         // myGlobal: false
     },
     rules: {
-        "prettier/prettier": "error",
+        "prettier/prettier": "error", // Prettier error
         "vue/component-tags-order": [
             "error",
             {
@@ -35,5 +36,6 @@ module.exports = {
         ],
         "no-console": 1,
         "no-invalid-this": 0,
+        "spaced-comment": ["error", "always", { exceptions: ["-", "+"] }],
     },
 }
