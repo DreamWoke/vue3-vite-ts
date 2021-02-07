@@ -34,8 +34,9 @@ module.exports = {
                 order: ["template", "script", "style"],
             },
         ],
-        "no-console": 1,
+        "no-console": 2,
         "no-invalid-this": 0,
         "spaced-comment": ["error", "always", { exceptions: ["-", "+"] }],
+        "no-debugger": 2,
     },
 }

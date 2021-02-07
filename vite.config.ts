@@ -1,11 +1,11 @@
-import path from "path"
+import { resolve } from "path"
+import vue from "@vitejs/plugin-vue"
+import legacy from "@vitejs/plugin-legacy"
 import { defineConfig, UserConfigExport, ConfigEnv, loadEnv } from "vite"
 import { formatEnv } from "./config/utils"
 import createProxy from "./config/proxy"
 import { createVitePlugins } from "./config/plugins"
-import vue from "@vitejs/plugin-vue"
 
-const { resolve } = path
 export default ({ command, mode }: ConfigEnv): UserConfigExport => {
     const root: string = process.cwd()
     const env = loadEnv(mode, root)
@@ -20,11 +20,17 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         },
         build: {
             assetsDir: "static",
+            brotliSize: false,
         },
-        plugins: [...createVitePlugins(viteEnv, isBuild), vue()],
+        plugins: [
+            ...(isBuild ? [legacy()] : []),
+            ...createVitePlugins(viteEnv, isBuild),
+            vue(),
+        ],
         server: {
             port: VITE_PORT,
             proxy: createProxy(VITE_PROXY),
+            open: true,
             hmr: {
                 overlay: true,
             },
@@ -45,5 +51,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
             namedExports: true,
             stringify: true,
         },
+        logLevel: "info",
+        clearScreen: false,
     })
 }
