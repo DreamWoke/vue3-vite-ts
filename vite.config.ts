@@ -1,9 +1,11 @@
 import { resolve } from "path"
 import vue from "@vitejs/plugin-vue"
+import vueJsx from "@vitejs/plugin-vue-jsx"
 import legacy from "@vitejs/plugin-legacy"
 import { defineConfig, UserConfigExport, ConfigEnv, loadEnv } from "vite"
 import { formatEnv } from "./config/utils"
 import createProxy from "./config/proxy"
+import { svgBuilder } from "./config/plugins/svgBuilder"
 import { createVitePlugins } from "./config/plugins"
 
 export default ({ command, mode }: ConfigEnv): UserConfigExport => {
@@ -25,7 +27,9 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         plugins: [
             ...(isBuild ? [legacy()] : []),
             ...createVitePlugins(viteEnv, isBuild),
+            svgBuilder("./src/assets/svg/"),
             vue(),
+            vueJsx(),
         ],
         server: {
             port: VITE_PORT,

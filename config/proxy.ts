@@ -4,10 +4,7 @@ type ProxyItem = [string, string]
 
 type ProxyList = ProxyItem[]
 
-type ProxyTargetList = Record<
-    string,
-    ServerOptions & { rewrite: (path: string) => string }
->
+type ProxyTargetList = Record<string, ServerOptions>
 
 const httpsRE = /^https:\/\//
 
@@ -23,7 +20,6 @@ export default function createProxy(list: ProxyList = []): ProxyTargetList {
             target: target,
             changeOrigin: true,
             ws: true,
-            rewrite: (path) => path.replace(new RegExp(`^${prefix}`), ""),
             // https is require secure=false
             ...(isHttps ? { secure: false } : {}),
         }

@@ -34,9 +34,12 @@ module.exports = {
                 order: ["template", "script", "style"],
             },
         ],
-        "no-console": 2,
+        "no-console": 1,
         "no-invalid-this": 0,
         "spaced-comment": ["error", "always", { exceptions: ["-", "+"] }],
         "no-debugger": 2,
+        "vue/html-indent": 0,
+        "vue/singleline-html-element-content-newline": 0,
+        "vue/max-attributes-per-line": 0,
     },
 }

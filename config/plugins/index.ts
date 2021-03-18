@@ -9,7 +9,6 @@ export function createVitePlugins(
     isBuild: boolean
 ): vitePluginsType {
     const vitePlugins: vitePluginsType = []
-
     // vite-plugin-html
     vitePlugins.push(configHtmlPlugin(viteEnv, isBuild))
     return vitePlugins

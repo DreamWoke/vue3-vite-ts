@@ -1,22 +1,11 @@
 import { ViteEnv } from "./@types/env"
 
-export const formatEnv = (envConf: any): ViteEnv => {
-    const envObj: any = {}
-
-    for (const envName of Object.keys(envConf)) {
-        let realName = envConf[envName].replace(/\\n/g, "\n")
-        realName =
-            realName === "true" ? true : realName === "false" ? false : realName
-        if (envName === "VITE_PORT") {
-            realName = Number(realName)
-        }
-        if (envName === "VITE_PROXY") {
-            try {
-                realName = JSON.parse(realName)
-            } catch (error) {}
-        }
-        envObj[envName] = realName
-        process.env[envName] = realName
+export const formatEnv = (envConf: Record<string, string>): ViteEnv => {
+    const { VITE_PORT, VITE_PUBLIC_PATH, VITE_PROXY, VITE_APP_TITLE } = envConf
+    return {
+        VITE_PORT: Number(VITE_PORT),
+        VITE_PUBLIC_PATH,
+        VITE_PROXY: JSON.parse(VITE_PROXY.replace(/\\n/g, "\n")),
+        VITE_APP_TITLE,
     }
-    return envObj
 }

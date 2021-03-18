@@ -1,12 +1,13 @@
 import { createApp } from "vue"
-import ElementPlus from "element-plus"
-import "element-plus/lib/theme-chalk/index.css"
-import "./style/basic.less"
 import App from "./App.vue"
+import SvgIcon from "@/component/SvgIcon/index.vue"
+import Router from "./route"
+import ElementPlus from "element-plus"
+import "./style/basic.scss"
+import "./style/element-variables.scss"
 
 const app = createApp(App)
-
-console.log("829382938")
-console.log("829382938")
+app.component("SvgIcon", SvgIcon)
 app.use(ElementPlus, { size: "small", zIndex: 3000 })
+app.use(Router)
 app.mount("#app")
